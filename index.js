@@ -28,6 +28,12 @@ async function run() {
             const result = await Carscollection.findOne(query);
             res.send(result);
         })
+
+        app.post('/items', async (req, res) => {
+            const item = req.body;
+            const result = await Carscollection.insertOne(item);
+            res.send(result);
+        })
     }
     finally {
 
