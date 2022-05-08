@@ -34,6 +34,21 @@ async function run() {
             const result = await Carscollection.insertOne(item);
             res.send(result);
         })
+        // Myitems api 
+        app.get('/myitems', async (req, res) => {
+            const email = req.query.email;
+            const query = { email: email };
+            const cursor = Carscollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+        // My Items Delete api 
+        app.delete('/myitems/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await Carscollection.deleteOne(query);
+            res.send(result);
+        })
     }
     finally {
 
