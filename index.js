@@ -49,6 +49,23 @@ async function run() {
             const result = await Carscollection.deleteOne(query);
             res.send(result);
         })
+
+        // update quantity
+        app.put('/items/:id', async (req, res) => {
+            const id = req.params.id;
+            const updatedquantity = req.body;
+            console.log(updatedquantity);
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updatedDoc = {
+                $set: {
+                    quantity: updatedquantity.quantity,
+                }
+            };
+            const result = await Carscollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
+        })
+
     }
     finally {
 
